@@ -45,11 +45,11 @@ def get_prefix(branches):
 
 def bump(latest):
     if any(elem in get_prefix(get_branches_on_last_commit())  for elem in MAJOR_BUMP):
-        return semver.bump_major(latest)
+        return semver.bump_major(latest[:1])
     if any(elem in get_prefix(get_branches_on_last_commit())  for elem in MINOR_BUMP):
-        return semver.bump_minor(latest)
+        return semver.bump_minor(latest[:1])
     if any(elem in get_prefix(get_branches_on_last_commit())  for elem in PATCH_BUMP):
-        return semver.bump_patch(latest)
+        return semver.bump_patch(latest[:1])
 
 
 def main():
