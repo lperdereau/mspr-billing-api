@@ -28,8 +28,8 @@ def tag_repo(tag):
     regex = r'^http(s)?://(([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11})/(.+)'
     push_url = re.sub(regex, r'git@\2:\4', url).replace('\n', '')
     git("remote", "set-url", "--push", "origin", push_url)
-    git("tag", tag)
-    git("push", "origin", tag)
+    git("tag", f'v{tag}')
+    git("push", "origin", f'v{tag}')
 
 def get_branches_on_last_commit():
     last_commit = git('log', '--format="%H"', '-n', '1').decode().replace('\"', '').strip()
@@ -66,7 +66,7 @@ def main():
 
         version = bump(latest)
 
-    tag_repo(f'v{version}')
+    tag_repo(version)
     print(version)
 
     return 0
