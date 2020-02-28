@@ -66,7 +66,7 @@ def main():
 
         version = bump(latest)
 
-    tag_repo(version)
+    tag_repo(f'v{version}')
     print(version)
 
     return 0
