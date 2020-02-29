@@ -20,7 +20,9 @@ config :mspr_billing_api, MsprBillingApiWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: []
+  watchers: [],
+  reloadable_compilers: [:gettext, :phoenix, :elixir],
+  reloadable_apps: [:ui, :backend]
 
 # ## SSL Support
 #

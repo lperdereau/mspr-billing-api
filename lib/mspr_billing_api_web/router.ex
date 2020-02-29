@@ -7,5 +7,6 @@ defmodule MsprBillingApiWeb.Router do
 
   scope "/api", MsprBillingApiWeb do
     pipe_through :api
+    get "/vat/:product", VatController, :show
   end
 end

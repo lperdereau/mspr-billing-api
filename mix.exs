@@ -1,16 +1,26 @@
 defmodule MsprBillingApi.MixProject do
   use Mix.Project
 
+  defp get_version() do
+    {version, _exit_copde} =System.cmd("git", ["describe", "--abbrev=0", "--tag"])
+    String.trim(version)
+      |> String.split("-")
+      |> Enum.take(2)
+      |> Enum.join(".")
+      |> String.replace_leading("v", "")
+  end
+
   def project do
     [
       app: :mspr_billing_api,
-      version: "0.1.0",
+      version: get_version(),
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      docs: [markdown_processor: ExDoc.Markdown.Earmark]
     ]
   end
 
@@ -20,7 +30,7 @@ defmodule MsprBillingApi.MixProject do
   def application do
     [
       mod: {MsprBillingApi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end
 
@@ -40,7 +50,11 @@ defmodule MsprBillingApi.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:httpoison, "~> 1.6"},
+      {:poison, "~> 3.1"},
+      {:earmark, "~> 1.2", only: :dev},
+      {:ex_doc, "~> 0.19", only: :dev}
     ]
   end
 
