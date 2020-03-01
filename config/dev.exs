@@ -1,14 +1,5 @@
 use Mix.Config
 
-# Configure your database
-config :mspr_billing_api, MsprBillingApi.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "mspr_billing_api_dev",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -20,9 +11,7 @@ config :mspr_billing_api, MsprBillingApiWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [],
-  reloadable_compilers: [:gettext, :phoenix, :elixir],
-  reloadable_apps: [:ui, :backend]
+  watchers: []
 
 # ## SSL Support
 #

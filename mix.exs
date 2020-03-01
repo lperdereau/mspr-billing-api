@@ -2,7 +2,7 @@ defmodule MsprBillingApi.MixProject do
   use Mix.Project
 
   defp get_version() do
-    {version, _exit_copde} =System.cmd("git", ["describe", "--abbrev=0", "--tag"])
+    {version, _exit_code} =System.cmd("git", ["describe", "--abbrev=0", "--tag"])
     String.trim(version)
       |> String.split("-")
       |> Enum.take(2)
@@ -13,14 +13,15 @@ defmodule MsprBillingApi.MixProject do
   def project do
     [
       app: :mspr_billing_api,
+      name: "Billing API",
       version: get_version(),
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      aliases: aliases(),
       deps: deps(),
-      docs: [markdown_processor: ExDoc.Markdown.Earmark]
+      docs: [markdown_processor: ExDoc.Markdown.Earmark],
+      javascript_config_path: "../version.js"
     ]
   end
 
@@ -30,7 +31,7 @@ defmodule MsprBillingApi.MixProject do
   def application do
     [
       mod: {MsprBillingApi.Application, []},
-      extra_applications: [:logger, :runtime_tools, :httpoison]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
@@ -45,9 +46,6 @@ defmodule MsprBillingApi.MixProject do
     [
       {:phoenix, "~> 1.4.14"},
       {:phoenix_pubsub, "~> 1.1"},
-      {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.1"},
-      {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
@@ -55,20 +53,6 @@ defmodule MsprBillingApi.MixProject do
       {:poison, "~> 3.1"},
       {:earmark, "~> 1.2", only: :dev},
       {:ex_doc, "~> 0.19", only: :dev}
-    ]
-  end
-
-  # Aliases are shortcuts or tasks specific to the current project.
-  # For example, to create, migrate and run the seeds file at once:
-  #
-  #     $ mix ecto.setup
-  #
-  # See the documentation for `Mix` for more info on aliases.
-  defp aliases do
-    [
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end

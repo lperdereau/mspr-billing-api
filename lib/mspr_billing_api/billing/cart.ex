@@ -1,4 +1,4 @@
-defmodule MsprBillingApi.Billing.Product do
+defmodule MsprBillingApi.Billing.Cart do
   @moduledoc """
   Product is a model provide by another API
   We use it to get VAT types:
@@ -7,7 +7,9 @@ defmodule MsprBillingApi.Billing.Product do
   - reduce
   - super reduce
   """
-  defstruct id: "", name: "", vatType: 0, price: 0, amount: 0
+  alias MsprBillingApi.Billing.Product
+
+  defstruct userId: "", createdAt: 0, products: [{%Product{}, amount: 0}]
   alias MsprBillingApi.Billing.Vat
 
   def get_vat(product) do

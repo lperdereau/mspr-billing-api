@@ -4,12 +4,11 @@ defmodule MsprBillingApi.Application do
   @moduledoc false
 
   use Application
+  alias MsprBillingApi.Billing.Vat
 
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      # Start the Ecto repository
-      MsprBillingApi.Repo,
       # Start the endpoint when the application starts
       MsprBillingApiWeb.Endpoint
       # Starts a worker by calling: MsprBillingApi.Worker.start_link(arg)
@@ -19,6 +18,9 @@ defmodule MsprBillingApi.Application do
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: MsprBillingApi.Supervisor]
+    :mnesia.start()
+    Vat.create_table()
+    Vat.insert_vat()
     Supervisor.start_link(children, opts)
   end
 

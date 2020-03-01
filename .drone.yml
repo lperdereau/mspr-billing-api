@@ -1,4 +1,69 @@
 ---
+.add_ssh: &add_ssh |
+  mkdir ~/.ssh
+  echo $SSH_KEY > ~/.ssh/id_rsa
+  chmod 600 ~/.ssh/id_rsa
+  ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+.doc_git: &doc_git |
+  VERSION=$(git describe --abbrev=0 --tag | tr -d '\n')
+  git clone $DOC_REPOSITORY_URL doc-git
+  rm -rf doc-git/doc/
+  mv doc/ doc-git/
+  cd doc-git
+  git add .
+  git commit -m "Add doc $VERSION"
+  git tag $VERSION
+  git log
+  git push
+  git push origin --tags
+
+.cache_elixir: 
+  - &restore_cache_elixir
+    image: minio/mc
+    commands:
+      - mc config host add s3 $ENDPOINT $ACCESS_KEY $SECRET_KEY
+      - MD5=$(md5sum mix.lock | sed 's/[ ]*mix.lock//g')
+      - |
+        if mc ls s3/mspr-billing-api/dependancies | grep $MD5
+          then
+          mc cp s3/mspr-billing-api/dependancies/$VERSION-$MD5.tar.gz ./
+          mkdir ./deps
+          tar xvf ./$VERSION-$MD5.tar.gz -C ./
+        fi
+    environment:
+      VERSION: v1
+      ENDPOINT:
+        from_secret: ENDPOINT_S3
+      ACCESS_KEY: 
+        from_secret: ACCESS_KEY_S3
+      SECRET_KEY:
+        from_secret: SECRET_KEY_S3
+
+  - &setup_deps_elixir
+    image: elixir
+    commands:
+      - mix local.hex --force
+      - mix local.rebar --force
+      - mix deps.get
+      - mix deps.compile
+    
+  - &rebuild_cache_elixir
+    image: minio/mc
+    commands:
+      - mc config host add s3 $ENDPOINT $ACCESS_KEY $SECRET_KEY
+      - MD5=$(md5sum mix.lock | sed 's/[ ]*mix.lock//g')
+      - tar cvf $VERSION-$MD5.tar.gz deps/
+      - mc cp ./$VERSION-$MD5.tar.gz s3/mspr-billing-api/dependancies/
+    environment:
+      VERSION: v1
+      ENDPOINT:
+        from_secret: ENDPOINT_S3
+      ACCESS_KEY: 
+        from_secret: ACCESS_KEY_S3
+      SECRET_KEY:
+        from_secret: SECRET_KEY_S3
+
 kind: pipeline
 type: kubernetes
 name: default
@@ -7,18 +72,48 @@ steps:
 - name: Semantical Versionning
   image: python:3.6
   commands:
-    - mkdir ~/.ssh
-    - echo $CI_SSH_KEY > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+    - *add_ssh
     - pip install -r .semver/requirements.txt
     - python .semver/main.py
   environment:
-    CI_REPOSITORY_URL:
-      from_secret: CI_REPOSITORY_URL
-    CI_SSH_KEY:
+    SSH_KEY:
       from_secret: CI_SSH_KEY
   when:
     branch:
     - master
     event: push
+
+- name: Restore cache
+  <<: *restore_cache_elixir
+
+- name: Setup dependancies
+  <<: *setup_deps_elixir
+  depends_on:
+    - Restore cache 
+
+- name: Rebuild cache
+  <<: *rebuild_cache_elixir
+  depends_on:
+    - Setup dependancies
+
+- name: Documentation
+  image: elixir
+  commands:
+    - *add_ssh
+    - git fetch --tags
+    - mix local.hex --force
+    - mix deps.get
+    - mix docs
+    - *doc_git
+  environment:
+    DOC_REPOSITORY_URL:
+      from_secret: DOC_REPOSITORY_URL
+    SSH_KEY:
+      from_secret: DOC_SSH_KEY
+  depends_on:
+    - Rebuild cache
+#  when:
+#    branch:
+#    - master
+#    event: push
+    

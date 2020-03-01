@@ -7,16 +7,13 @@
 # General application configuration
 use Mix.Config
 
-config :mspr_billing_api,
-  ecto_repos: [MsprBillingApi.Repo]
-
 # Configures the endpoint
 config :mspr_billing_api, MsprBillingApiWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "+05DEW24CHcCrUkdRqSDTPmbudlAETe3T+HKgYjdeqGABBRoy6fHCqhDZn1tiXE+",
+  secret_key_base: "rw//c7h2YQipnGgpxDfFaNgvj2ePLIH2DTLVvcr42t2CwpLFoL6nWwjISuKgTmJq",
   render_errors: [view: MsprBillingApiWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: MsprBillingApi.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "g4dKMwuv"]
+  live_view: [signing_salt: "sCKs4pnX"]
 
 # Configures Elixir's Logger
 config :logger, :console,
