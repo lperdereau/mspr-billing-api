@@ -106,6 +106,7 @@ steps:
 - name: Generate release
   image: elixir
   commands: 
+    - git fetch --tags
     - SECRET_KEY_BASE=$(elixir -e ":crypto.strong_rand_bytes(48) |> Base.encode64 |> IO.puts")
     - sed "s|SECRET+KEY+BASE|$SECRET_KEY_BASE|" config/prod.secret.exs.sample >config/prod.secret.exs
     - mix local.hex --force
