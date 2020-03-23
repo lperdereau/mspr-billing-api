@@ -21,7 +21,13 @@ defmodule MsprBillingApi.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: [markdown_processor: ExDoc.Markdown.Earmark],
-      javascript_config_path: "../version.js"
+      javascript_config_path: "../version.js",
+      releases: [
+        app: [
+          include_executables_for: [:unix],
+          applications: [runtime_tools: :permanent, mspr_billing_api: :permanent]
+        ],
+      ]
     ]
   end
 
@@ -31,7 +37,8 @@ defmodule MsprBillingApi.MixProject do
   def application do
     [
       mod: {MsprBillingApi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools],
+      included_applications: [:mnesia]
     ]
   end
 

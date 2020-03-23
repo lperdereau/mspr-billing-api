@@ -10,8 +10,9 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :mspr_billing_api, MsprBillingApiWeb.Endpoint,
+  http: [port: System.get_env("PORT") || 4000],
   url: [host: "0.0.0.0", port: System.get_env("PORT") || 4000],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  server: true
 
 # Do not print debug messages in production
 config :logger, level: :info

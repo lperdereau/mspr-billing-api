@@ -111,10 +111,11 @@ steps:
     - sed "s|SECRET+KEY+BASE|$SECRET_KEY_BASE|" config/prod.secret.exs.sample >config/prod.secret.exs
     - mix local.hex --force
     - mix local.rebar --force
-    - MIX_ENV=prod mix release
-    - mv ./_build ./build
+    - MIX_ENV=prod mix release app --path=build
   depends_on:
     - Tests
+  when:
+    event: tag
 
 - name: docker
   image: banzaicloud/drone-kaniko
@@ -132,16 +133,20 @@ steps:
       - latest
   depends_on: 
     - Generate release
+  when:
+    event: tag
 
 - name: rollout
   image: pabloclsn/kubectl-docker:latest
   commands:
     - echo $KUBE_CONFIG > ~/.kube/config
-    - kubectl rollout restart deployment/doc-billing-deployment -n doc-billing 
+    - kubectl rollout restart deployment/billing-deployment -n prod-mspr-ci
   environment:
     KUBE_CONFIG:
       from_secret: KUBE_CONFIG
   depends_on: [docker]
+  when:
+    event: tag
 
 - name: Documentation
   image: elixir
@@ -150,7 +155,7 @@ steps:
     - git fetch --tags
     - mix local.hex --force
     - mix deps.get
-    - mix docs
+    - ./docs.sh
     - *doc_git
   environment:
     DOC_REPOSITORY_URL:
@@ -159,8 +164,6 @@ steps:
       from_secret: DOC_SSH_KEY
   depends_on:
     - rollout
-#  when:
-#    branch:
-#    - master
-#    event: push
+  when:
+    event: tag
     

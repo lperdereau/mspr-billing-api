@@ -18,6 +18,7 @@ defmodule MsprBillingApi.Application do
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: MsprBillingApi.Supervisor]
+    :mnesia.create_schema([node()])
     :mnesia.start()
     Vat.create_table()
     Vat.insert_vat()
