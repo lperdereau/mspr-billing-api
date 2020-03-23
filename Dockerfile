@@ -10,7 +10,6 @@ WORKDIR /opt/app
 
 # Update nodejs, rebar, and hex.
 RUN apk update \
-    && apk --no-cache --update add nodejs nodejs-npm \
     && mix local.rebar --force \
     && mix local.hex --force
 COPY . .
