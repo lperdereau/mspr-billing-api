@@ -97,6 +97,7 @@ steps:
     - Setup dependancies
 
 - name: Tests
+  image: elixir
   commands: 
     - echo "coucou"
   depends_on:
