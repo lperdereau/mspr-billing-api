@@ -13,8 +13,7 @@ USER appuser
 
 ENV MIX_ENV=prod REPLACE_OS_VARS=true
 WORKDIR /opt/app
-COPY . .
-COPY ./build/prod/rel/mspr_billing_api/bin/mspr_billing_api /opt/app/bin/start_server
+COPY ./build/ ./
 ENV RUNNER_LOG_DIR /var/log
 
 # Command to execute the application.
