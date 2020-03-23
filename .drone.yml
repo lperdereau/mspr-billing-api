@@ -126,7 +126,8 @@ steps:
     tags:
       - ${DRONE_TAG}
       - latest
-  depends_on: [Tests]
+  depends_on: 
+    - Generate release
 
 - name: rollout
   image: pabloclsn/kubectl-docker:latest
