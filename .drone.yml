@@ -109,7 +109,7 @@ steps:
     email: louis.epsi.perdereau@gmail.com
     dockerfile: ./Dockerfile
     registry: docker.pkg.github.com
-    repo: lperdereau/mspr-billing-api/api
+    repo: lperdereau/mspr-billing-api/billing-api
     username:
       from_secret: github_username
     password:
