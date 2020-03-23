@@ -96,6 +96,38 @@ steps:
   depends_on:
     - Setup dependancies
 
+- name: Tests
+  commands: 
+    - echo "coucou"
+  depends_on:
+    - Rebuild cache
+
+- name: docker
+  image: banzaicloud/drone-kaniko
+  settings:
+    email: louis.epsi.perdereau@gmail.com
+    dockerfile: ./Dockerfile
+    registry: docker.pkg.github.com
+    repo: lperdereau/mspr-billing-api/api
+    username:
+      from_secret: github_username
+    password:
+      from_secret: github_token
+    tags:
+      - ${DRONE_TAG}
+      - latest
+  depends_on: [Tests]
+
+- name: rollout
+  image: pabloclsn/kubectl-docker:latest
+  commands:
+    - echo $KUBE_CONFIG > ~/.kube/config
+    - kubectl rollout restart deployment/doc-billing-deployment -n doc-billing 
+  environment:
+    KUBE_CONFIG:
+      from_secret: KUBE_CONFIG
+  depends_on: [docker]
+
 - name: Documentation
   image: elixir
   commands:
@@ -111,7 +143,7 @@ steps:
     SSH_KEY:
       from_secret: DOC_SSH_KEY
   depends_on:
-    - Rebuild cache
+    - rollout
 #  when:
 #    branch:
 #    - master
