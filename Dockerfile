@@ -16,12 +16,6 @@ COPY . .
 
 # Download and compile dependencies, then compile Web app.
 RUN mix do deps.get, deps.compile, compile
-RUN cd ${PHOENIX_SUBDIR}/assets \
-    && npm install \
-    && ./node_modules/brunch/bin/brunch build -p \
-    && cd .. \
-    && mix phx.digest
-
 # Create a release version of the application
 RUN mix release --env=prod --verbose \
     && mv _build/prod/rel/${APP_NAME} /opt/release \
