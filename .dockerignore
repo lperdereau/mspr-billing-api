@@ -31,5 +31,3 @@ mspr_billing_api-*.tar
 .elixir_ls
 
 .semver/env
-
-.vscode/

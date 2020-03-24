@@ -7,7 +7,7 @@ defmodule MsprBillingApiWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_mspr_billing_api_key",
-    signing_salt: "bCX1HIRq"
+    signing_salt: "yrvv+coG"
   ]
 
   socket "/socket", MsprBillingApiWeb.UserSocket,
