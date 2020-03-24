@@ -16,3 +16,6 @@ for v in $(git tag -l | xargs); do
 done
 echo "]" >> docs/docs_config.js
 mv ./docs ./doc
+for d in $(find ./doc -type d -name "v*"); do
+  cp doc/docs_config.js $d/
+done
