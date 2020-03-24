@@ -1,7 +1,7 @@
 defmodule MsprBillingApi.MixProject do
   use Mix.Project
 
-  defp get_version() do
+  def get_version() do
     {version, _exit_code} =System.cmd("git", ["describe", "--abbrev=0", "--tag"])
     String.trim(version)
       |> String.split("-")
@@ -58,6 +58,7 @@ defmodule MsprBillingApi.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.6"},
       {:poison, "~> 3.1"},
+      {:open_api_spex, "~> 3.6"},
       {:earmark, "~> 1.2", only: :dev},
       {:ex_doc, "~> 0.19", only: :dev}
     ]
