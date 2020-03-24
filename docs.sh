@@ -15,4 +15,4 @@ for v in $(git tag -l | xargs); do
     counter=$((counter +1))
 done
 echo "]" >> docs/docs_config.js
-mv docs/* doc
+mv ./docs ./doc
