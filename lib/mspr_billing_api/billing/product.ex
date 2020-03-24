@@ -11,6 +11,6 @@ defmodule MsprBillingApi.Billing.Product do
   alias MsprBillingApi.Billing.Vat
 
   def get_vat(product) do
-    Vat.get_vat_by_type(product.vatType)
+    List.first(Vat.get_vat_by_type(product.vatType))
   end
 end

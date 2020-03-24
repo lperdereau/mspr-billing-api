@@ -1,9 +1,32 @@
 defmodule MsprBillingApiWeb.VatController do
   use MsprBillingApiWeb, :controller
+  require OpenApiSpex
+  import OpenApiSpex.Operation
+  alias OpenApiSpex.Operation
+  alias OpenApiSpex.Schema
   alias MsprBillingApiWeb.{JsonHelpers, Gettext}
   alias MsprBillingApi.Billing.{Vat, Product}
+  alias MsprBillingApi.Schemas
 
   @notFoundId "%{ressource} not found with this id"
+
+  plug OpenApiSpex.Plug.CastAndValidate
+
+  def open_api_operation(action) do
+    apply(__MODULE__, :"#{action}_operation", [])
+  end
+
+  def show_operation() do
+    %Operation{
+      tags: ["VAT"],
+      summary: "product's vat",
+      description: "vat of product",
+      operationId: "vatcontroller.show",
+      responses: %{
+        200 => response("vat", "application/json", Schemas.VatsResponse)
+      }
+    }
+  end
 
   def show(conn, %{"product_id" => product_id}) do
     url = System.get_env("CART_API_URL")
@@ -26,6 +49,18 @@ defmodule MsprBillingApiWeb.VatController do
         JsonHelpers.pretty_json(conn, 500, %{message: "Error"})
     end
   end
+  
+  def show_vat_operation() do
+    %Operation{
+      tags: ["VAT"],
+      summary: "product's vat",
+      description: "vat of product",
+      operationId: "vatcontroller.show",
+      responses: %{
+        200 => response("vat", "application/json", Schemas.VatsResponse)
+      }
+    }
+  end
 
   def show_vat(conn, %{"type" => type}) do
     tab = Vat.get_vat_by_type(type)
@@ -39,6 +74,18 @@ defmodule MsprBillingApiWeb.VatController do
       _ ->
         JsonHelpers.pretty_json(conn, 500, %{message: "Error"})
     end
+  end
+
+  def show_vats_operation() do
+    %Operation{
+      tags: ["VAT"],
+      summary: "product's vat",
+      description: "vat of product",
+      operationId: "vatcontroller.show",
+      responses: %{
+        200 => response("vat", "application/json", Schemas.VatsResponse)
+      }
+    }
   end
 
   def show_vats(conn, _params) do
