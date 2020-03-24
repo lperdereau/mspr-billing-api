@@ -23,7 +23,7 @@ defmodule MsprBillingApiWeb.VatController do
       description: "vat of product",
       operationId: "vatcontroller.show",
       responses: %{
-        200 => response("vat", "application/json", Schemas.VatsResponse)
+        200 => response("vat", "application/json", Schemas.Vat)
       }
     }
   end
@@ -49,7 +49,7 @@ defmodule MsprBillingApiWeb.VatController do
         JsonHelpers.pretty_json(conn, 500, %{message: "Error"})
     end
   end
-  
+
   def show_vat_operation() do
     %Operation{
       tags: ["VAT"],
@@ -57,7 +57,7 @@ defmodule MsprBillingApiWeb.VatController do
       description: "vat of product",
       operationId: "vatcontroller.show",
       responses: %{
-        200 => response("vat", "application/json", Schemas.VatsResponse)
+        200 => response("vat", "application/json", Schemas.Vat)
       }
     }
   end
@@ -83,7 +83,10 @@ defmodule MsprBillingApiWeb.VatController do
       description: "vat of product",
       operationId: "vatcontroller.show",
       responses: %{
-        200 => response("vat", "application/json", Schemas.VatsResponse)
+        200 => response("vat", "application/json", %OpenApiSpex.Schema{
+          type: :array,
+          items: Schemas.Vat
+        })
       }
     }
   end

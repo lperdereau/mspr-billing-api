@@ -18,14 +18,4 @@ defmodule MsprBillingApi.Schemas do
           }
       })
     end
-
-    defmodule VatsResponse do
-        OpenApiSpex.schema(%{
-          title: "vat response",
-          description: "Response schema for single vat",
-          type: :array,
-          items: Vat,
-          "x-struct": __MODULE__
-        })
-    end
 end
