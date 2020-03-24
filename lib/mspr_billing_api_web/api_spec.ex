@@ -7,7 +7,7 @@ defmodule MsprBillingApiWeb.ApiSpec do
       %OpenApi{
         info: %Info{
           title: "Mspr Billing Api",
-          version: Application.spec(:mspr_billing_api, :vsn)
+          version: List.to_string(Application.spec(:mspr_billing_api, :vsn))
         },
         servers: [OpenApiSpex.Server.from_endpoint(MsprBillingApiWeb.Endpoint)],
         paths: Paths.from_router(MsprBillingApiWeb.Router)
