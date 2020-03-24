@@ -1,5 +1,4 @@
 defmodule MsprBillingApiWeb.ApiSpec do
-    alias MsprBillingApi.MixProject
     alias OpenApiSpex.{Info, OpenApi, Paths}
     @behaviour OpenApi
 
@@ -8,7 +7,7 @@ defmodule MsprBillingApiWeb.ApiSpec do
       %OpenApi{
         info: %Info{
           title: "Mspr Billing Api",
-          version: MixProject.get_version()
+          version: Application.spec(:mspr_billing_api, :vsn)
         },
         servers: [OpenApiSpex.Server.from_endpoint(MsprBillingApiWeb.Endpoint)],
         paths: Paths.from_router(MsprBillingApiWeb.Router)
