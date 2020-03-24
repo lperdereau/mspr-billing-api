@@ -1,7 +1,7 @@
 defmodule MsprBillingApi.MixProject do
   use Mix.Project
 
-  defp get_version() do
+  def get_version() do
     {version, _exit_code} =System.cmd("git", ["describe", "--abbrev=0", "--tag"])
     String.trim(version)
       |> String.split("-")
