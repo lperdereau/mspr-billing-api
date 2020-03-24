@@ -59,6 +59,7 @@ defmodule MsprBillingApi.MixProject do
       {:httpoison, "~> 1.6"},
       {:poison, "~> 3.1"},
       {:open_api_spex, "~> 3.6"},
+      {:cors_plug, "~> 1.5"},
       {:earmark, "~> 1.2", only: :dev},
       {:ex_doc, "~> 0.19", only: :dev}
     ]

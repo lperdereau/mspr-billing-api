@@ -6,6 +6,7 @@ defmodule MsprBillingApiWeb.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
     plug OpenApiSpex.Plug.PutApiSpec, module: MsprBillingApiWeb.ApiSpec
   end
