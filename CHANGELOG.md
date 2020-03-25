@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/lperdereau/mspr-billing-api/compare/v0.4.0...v0.4.1) (2020-03-25)
+
+
+### Bug Fixes
+
+* **arch:** clean up the project ([#28](https://github.com/lperdereau/mspr-billing-api/issues/28)) ([24bdf92](https://github.com/lperdereau/mspr-billing-api/commit/24bdf92d68ac8b5f688f9582145df4a4530e0a00))
+
 # [0.4.0](https://github.com/lperdereau/mspr-billing-api/compare/v0.3.0...v0.4.0) (2020-03-25)
 
 
