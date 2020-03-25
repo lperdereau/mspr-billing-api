@@ -56,8 +56,8 @@ defmodule MsprBillingApiWeb.VatController do
   def show_vat_operation() do
     %Operation{
       tags: ["VAT"],
-      summary: "product's vat",
-      description: "vat of product",
+      summary: "vat by type",
+      description: "vat by type",
       operationId: "vatcontroller.show",
       parameters: [
         Operation.parameter(:type, :path, :string, "type", example: 1)
@@ -85,8 +85,8 @@ defmodule MsprBillingApiWeb.VatController do
   def show_vats_operation() do
     %Operation{
       tags: ["VAT"],
-      summary: "product's vat",
-      description: "vat of product",
+      summary: "List of vat",
+      description: "All vat",
       operationId: "vatcontroller.show",
       responses: %{
         200 => response("vat", "application/json", %OpenApiSpex.Schema{
