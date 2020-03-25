@@ -33,3 +33,5 @@ mspr_billing_api-*.tar
 .semver/env
 
 .vscode/
+
+.DS_Store
