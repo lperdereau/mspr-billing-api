@@ -76,6 +76,8 @@ steps:
   environment:
     GITHUB_TOKEN:
       from_secret: github_token
+  depends_on: 
+    - Tests
   when:
     branch:
     - master
