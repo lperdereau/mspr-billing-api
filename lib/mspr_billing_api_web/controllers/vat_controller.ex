@@ -22,6 +22,9 @@ defmodule MsprBillingApiWeb.VatController do
       summary: "product's vat",
       description: "vat of product",
       operationId: "vatcontroller.show",
+      parameters: [
+        Operation.parameter(:product_id, :path, :string, "product ID", example: 1)
+      ],
       responses: %{
         200 => response("vat", "application/json", Schemas.Vat)
       }
