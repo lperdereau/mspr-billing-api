@@ -1,3 +1,10 @@
+## [0.4.2](https://github.com/lperdereau/mspr-billing-api/compare/v0.4.1...v0.4.2) (2020-03-25)
+
+
+### Bug Fixes
+
+* **semantic versionning:** depends on Tests ([#29](https://github.com/lperdereau/mspr-billing-api/issues/29)) ([55dbae1](https://github.com/lperdereau/mspr-billing-api/commit/55dbae11c7233db359641911a990916cebedb54b))
+
 ## [0.4.1](https://github.com/lperdereau/mspr-billing-api/compare/v0.4.0...v0.4.1) (2020-03-25)
 
 
