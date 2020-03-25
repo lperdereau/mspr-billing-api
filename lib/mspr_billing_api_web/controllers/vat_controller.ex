@@ -22,6 +22,9 @@ defmodule MsprBillingApiWeb.VatController do
       summary: "product's vat",
       description: "vat of product",
       operationId: "vatcontroller.show",
+      parameters: [
+        Operation.parameter(:product_id, :path, :string, "product ID", example: 1)
+      ],
       responses: %{
         200 => response("vat", "application/json", Schemas.Vat)
       }
@@ -53,9 +56,12 @@ defmodule MsprBillingApiWeb.VatController do
   def show_vat_operation() do
     %Operation{
       tags: ["VAT"],
-      summary: "product's vat",
-      description: "vat of product",
+      summary: "vat by type",
+      description: "vat by type",
       operationId: "vatcontroller.show",
+      parameters: [
+        Operation.parameter(:type, :path, :string, "type", example: 1)
+      ],
       responses: %{
         200 => response("vat", "application/json", Schemas.Vat)
       }
@@ -79,8 +85,8 @@ defmodule MsprBillingApiWeb.VatController do
   def show_vats_operation() do
     %Operation{
       tags: ["VAT"],
-      summary: "product's vat",
-      description: "vat of product",
+      summary: "List of vat",
+      description: "All vat",
       operationId: "vatcontroller.show",
       responses: %{
         200 => response("vat", "application/json", %OpenApiSpex.Schema{
