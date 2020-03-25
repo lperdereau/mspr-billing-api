@@ -70,14 +70,12 @@ name: default
 
 steps: 
 - name: Semantical Versionning
-  image: python:3.6
+  image: node:12
   commands:
-    - *add_ssh
-    - pip install -r .semver/requirements.txt
-    - python .semver/main.py
+    - npx -p @semantic-release/commit-analyzer -p @semantic-release/release-notes-generator -p @semantic-release/github -p @semantic-release/changelog -p @semantic-release/git -p semantic-release semantic-release
   environment:
-    SSH_KEY:
-      from_secret: CI_SSH_KEY
+    GITHUB_TOKEN:
+      from_secret: github_token
   when:
     branch:
     - master
