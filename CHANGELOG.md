@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/lperdereau/mspr-billing-api/compare/v0.3.0...v0.4.0) (2020-03-25)
+
+
+### Features
+
+* **template:** add template ([dbf5a76](https://github.com/lperdereau/mspr-billing-api/commit/dbf5a7610122a613a50e3f21196c5fb9289dc316))
+
 # [0.3.0](https://github.com/lperdereau/mspr-billing-api/compare/v0.2.4...v0.3.0) (2020-03-25)
 
 
