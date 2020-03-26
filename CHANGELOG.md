@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/lperdereau/mspr-billing-api/compare/v0.4.3...v0.5.0) (2020-03-26)
+
+
+### Features
+
+* **tests:** Add tests and coverage ([#33](https://github.com/lperdereau/mspr-billing-api/issues/33)) ([77beb1f](https://github.com/lperdereau/mspr-billing-api/commit/77beb1fe2fd96491f69ea15f6031f7bbaf005faa))
+
 ## [0.4.3](https://github.com/lperdereau/mspr-billing-api/compare/v0.4.2...v0.4.3) (2020-03-26)
 
 
