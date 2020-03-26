@@ -24,6 +24,6 @@ defmodule MsprBillingApiWeb.Router do
 
     get "/cart/:user_id/billing", MsprBillingApiWeb.BillingController, :show
 
-    get("/openapi", OpenApiSpex.Plug.RenderSpec, :show) 
+    get "/openapi", OpenApiSpex.Plug.RenderSpec, :show
   end
 end

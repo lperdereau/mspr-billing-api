@@ -22,6 +22,8 @@ defmodule MsprBillingApi.MixProject do
       deps: deps(),
       docs: [markdown_processor: ExDoc.Markdown.Earmark],
       javascript_config_path: "../version.js",
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
       releases: [
         app: [
           include_executables_for: [:unix],
@@ -60,8 +62,10 @@ defmodule MsprBillingApi.MixProject do
       {:poison, "~> 3.1"},
       {:open_api_spex, "~> 3.6"},
       {:cors_plug, "~> 1.5"},
+      {:mock, "~> 0.3.4"},
       {:earmark, "~> 1.2", only: :dev},
-      {:ex_doc, "~> 0.19", only: :dev}
+      {:ex_doc, "~> 0.19", only: :dev},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 end

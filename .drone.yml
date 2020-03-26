@@ -99,8 +99,15 @@ steps:
 - name: Tests
   image: elixir
   commands:
-    - echo "coucou"
-  depends_on: 
+    - git fetch --tags
+    - mix local.hex --force
+    - mix local.rebar --force
+    - mix coveralls.post --token $COVERALLS_TOKEN --branch "$DRONE_BRANCH" --name "CI" --committer "$DRONE_COMMIT_AUTHOR" --sha "$DRONE_COMMIT_SHA" --message "$DRONE_COMMIT_MESSAGE"
+  environment:
+    MIX_ENV: test
+    COVERALLS_TOKEN:
+      from_secret: COVERALLS_TOKEN
+  depends_on:
     - Rebuild cache
 
 - name: Generate release
