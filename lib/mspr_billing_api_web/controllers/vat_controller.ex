@@ -10,8 +10,6 @@ defmodule MsprBillingApiWeb.VatController do
 
   @notFoundId "%{ressource} not found with this id"
 
-  plug OpenApiSpex.Plug.CastAndValidate
-
   def open_api_operation(action) do
     apply(__MODULE__, :"#{action}_operation", [])
   end
