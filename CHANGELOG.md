@@ -1,3 +1,10 @@
+## [0.4.3](https://github.com/lperdereau/mspr-billing-api/compare/v0.4.2...v0.4.3) (2020-03-26)
+
+
+### Bug Fixes
+
+* **swagger:** Patch some bad effect of swagger integration ([#32](https://github.com/lperdereau/mspr-billing-api/issues/32)) ([747173f](https://github.com/lperdereau/mspr-billing-api/commit/747173fd3efe532f7c6f07f3a14aeacd66f47404))
+
 ## [0.4.2](https://github.com/lperdereau/mspr-billing-api/compare/v0.4.1...v0.4.2) (2020-03-25)
 
 
