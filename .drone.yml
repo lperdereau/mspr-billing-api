@@ -69,20 +69,6 @@ type: kubernetes
 name: default
 
 steps: 
-- name: Semantical Versionning
-  image: node:12
-  commands:
-    - npx -p @semantic-release/commit-analyzer -p @semantic-release/release-notes-generator -p @semantic-release/github -p @semantic-release/changelog -p @semantic-release/git -p semantic-release semantic-release
-  environment:
-    GITHUB_TOKEN:
-      from_secret: github_token
-  depends_on: 
-    - Tests
-  when:
-    branch:
-    - master
-    event: push
-
 - name: Restore cache
   <<: *restore_cache_elixir
 
@@ -110,6 +96,20 @@ steps:
   depends_on:
     - Rebuild cache
 
+- name: Semantical Versionning
+  image: node:12
+  commands:
+    - npx -p @semantic-release/commit-analyzer -p @semantic-release/release-notes-generator -p @semantic-release/github -p @semantic-release/changelog -p @semantic-release/git -p semantic-release semantic-release
+  environment:
+    GITHUB_TOKEN:
+      from_secret: github_token
+  depends_on: 
+    - Tests
+  when:
+    branch:
+    - master
+    event: push
+
 - name: Generate release
   image: elixir
   commands:
@@ -123,7 +123,7 @@ steps:
     - Tests
   when:
     event: tag
-
+  
 - name: docker
   image: banzaicloud/drone-kaniko
   settings:
