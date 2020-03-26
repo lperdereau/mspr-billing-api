@@ -5,6 +5,7 @@ defmodule MsprBillingApi.Billing.Vat do
 
   @moduledoc since: "v0.0.1"
 
+  defstruct type: "", percentage: 0
   @doc """
   Allow you to initialiaze Mnesia table for VAT
 

@@ -21,7 +21,7 @@ defmodule MsprBillingApiWeb.VatController do
       description: "vat of product",
       operationId: "vatcontroller.show",
       parameters: [
-        Operation.parameter(:product_id, :path, :string, "product ID", example: 1)
+        Operation.parameter(:product_id, :path, :string, "product ID", example: 1, required: true)
       ],
       responses: %{
         200 => response("vat", "application/json", Schemas.Vat)
@@ -42,10 +42,6 @@ defmodule MsprBillingApiWeb.VatController do
         %{
           msg: Gettext.gettext(@notFoundId, ressource: "product")
         })
-
-      {:error, %{reason: _reason}} ->
-        # do something with an error
-        JsonHelpers.pretty_json(conn, 500, %{message: "Error"})
       _ ->
         JsonHelpers.pretty_json(conn, 500, %{message: "Error"})
     end

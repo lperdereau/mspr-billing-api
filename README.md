@@ -2,6 +2,8 @@
 
 [![Build Status](https://drone.k3d.dev/api/badges/lperdereau/mspr-billing-api/status.svg)](https://drone.k3d.dev/lperdereau/mspr-billing-api)
 
+[![Coverage Status](https://coveralls.io/repos/github/lperdereau/mspr-billing-api/badge.svg?branch=master)](https://coveralls.io/github/lperdereau/mspr-billing-api?branch=master)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

@@ -1,0 +1,12 @@
+{
+  "skip_files": [
+    "test/support",
+    "lib/mspr_billing_api_web/views/error_hel",
+    "lib/mspr_billing_api_web/gettext.ex",
+    "lib/mspr_billing_api_web/endpoint.ex",
+    "lib/mspr_billing_api_web/channels/user_s",
+    "lib/mspr_billing_api_web.ex",
+    "lib/mspr_billing_api.ex",
+    "lib/mspr_billing_api_web/mix/task/spec.e"
+  ]
+}
