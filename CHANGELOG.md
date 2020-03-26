@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/lperdereau/mspr-billing-api/compare/v0.5.0...v0.5.1) (2020-03-26)
+
+
+### Bug Fixes
+
+* **ci:** Move sementical versioning to the end ([#35](https://github.com/lperdereau/mspr-billing-api/issues/35)) ([4d8efa8](https://github.com/lperdereau/mspr-billing-api/commit/4d8efa8b4ca1a2ed65ebc024d0bd43d02ab59689))
+
 # [0.5.0](https://github.com/lperdereau/mspr-billing-api/compare/v0.4.3...v0.5.0) (2020-03-26)
 
 
