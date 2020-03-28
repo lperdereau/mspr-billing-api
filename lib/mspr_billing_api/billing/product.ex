@@ -7,7 +7,7 @@ defmodule MsprBillingApi.Billing.Product do
   - reduce
   - super reduce
   """
-  defstruct id: "", name: "", vatType: 0, price: 0, amount: 0
+  defstruct id: "", name: "", vatType: "", price: 0, amount: 0
   alias MsprBillingApi.Billing.Vat
 
   def get_vat(product) do
