@@ -8,5 +8,10 @@
     "lib/mspr_billing_api_web.ex",
     "lib/mspr_billing_api.ex",
     "lib/mspr_billing_api_web/mix/task/spec.e"
-  ]
+  ],
+
+  "coverage_options": {
+    "output_dir": "cover/",
+    "minimum_coverage": 90
+  }
 }

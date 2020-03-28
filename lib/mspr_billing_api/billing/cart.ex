@@ -9,10 +9,13 @@ defmodule MsprBillingApi.Billing.Cart do
   """
   alias MsprBillingApi.Billing.Product
 
-  defstruct userId: "", createdAt: 0, products: [{%Product{}, amount: 0}]
-  alias MsprBillingApi.Billing.Vat
+  defstruct userId: "", createdAt: 0, products: [%Product{}]
 
-  def get_vat(product) do
-    Vat.get_vat_by_type(product.vatType)
+  def get_vat(cart) do
+    Enum.sum(
+      Enum.map(cart.products, fn x ->
+        Float.floor(Product.get_vat(x).percentage/100 * x.price * x.amount, 3)
+      end)
+    )
   end
 end
