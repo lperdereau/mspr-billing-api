@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/lperdereau/mspr-billing-api/compare/v0.5.2...v0.6.0) (2020-03-29)
+
+
+### Features
+
+* **smoke test:** add smoke test and pipeline smoke test hour ([#38](https://github.com/lperdereau/mspr-billing-api/issues/38)) ([ffa7bb8](https://github.com/lperdereau/mspr-billing-api/commit/ffa7bb8b39821fc467adf16d559363e3f03d6ec1))
+
 ## [0.5.2](https://github.com/lperdereau/mspr-billing-api/compare/v0.5.1...v0.5.2) (2020-03-28)
 
 
